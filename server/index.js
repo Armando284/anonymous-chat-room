@@ -10,7 +10,11 @@ io.on('connection', (socket) => {
     console.log('a user connected')
     socket.on('message', (message) => {
         console.log(message)
-        io.emit('message', `${socket.id.substr(0, 2)} dijo: ${message}`)
+        const userId = socket.id.substr(0, 4)
+        io.emit('message', {
+            id: userId,
+            message: `<strong><i>${userId} dijo:</i></strong> ${message}`
+        })
     })
 })
 
